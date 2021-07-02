@@ -1,4 +1,4 @@
-import routes from 'containers/Dashboard/routes';
+import routes from '../routes';
 
 export const useRouteName = () => {
   let name = '';

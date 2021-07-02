@@ -10,7 +10,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Dashboard from 'containers/Dashboard/Loadable';
+import Admin from 'containers/Admin/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -19,7 +19,7 @@ export default function App() {
   return (
     <div>
       <Switch>
-        <Route path="/" component={Dashboard} />
+        <Route path="/" component={Admin} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

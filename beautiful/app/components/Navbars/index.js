@@ -12,7 +12,7 @@ import Menu from '@material-ui/icons/Menu';
 // core components
 import Button from 'components/CustomButtons';
 
-import { useRouteName } from 'hooks';
+import { useRouteName } from 'containers/Admin/hooks';
 import styles from 'assets/jss/material-dashboard-react/components/headerStyle';
 import AdminNavbarLinks from './AdminNavbarLinks';
 

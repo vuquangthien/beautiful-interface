@@ -1,20 +1,21 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable react/no-array-index-key */
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-// creates a beautiful scrollbar
+import { Route, Switch, Redirect } from 'react-router-dom';
+
+import 'assets/css/material-dashboard-react.css?v=1.10.0';
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 // core components
 import Navbar from 'components/Navbars';
-// import Footer from 'components/Footer/Footer.js';
+import Footer from 'components/Footer';
 import Sidebar from 'components/Sidebar';
 // import FixedPlugin from 'components/FixedPlugin/FixedPlugin.js';
 
-import routes from 'containers/Dashboard/routes';
+import routes from 'containers/Admin/routes';
 
 import styles from 'assets/jss/material-dashboard-react/layouts/adminStyle';
 
@@ -119,7 +120,7 @@ export default function Admin({ ...rest }) {
         ) : (
           <div className={classes.map}>{switchRoutes}</div>
         )}
-        {/* {getRoute() ? <Footer /> : null} */}
+        {getRoute() ? <Footer /> : null}
         {/* <FixedPlugin
           handleImageClick={handleImageClick}
           handleColorClick={handleColorClick}
