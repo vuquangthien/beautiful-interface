@@ -1,15 +1,15 @@
 // @material-ui/icons
 import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
-import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import BubbleChart from '@material-ui/icons/BubbleChart';
-import LocationOn from '@material-ui/icons/LocationOn';
 import Notifications from '@material-ui/icons/Notifications';
-// core components/views for Admin layout
+import AppsIcon from '@material-ui/icons/Apps';
+import CategoryIcon from '@material-ui/icons/Category';
+import SettingsIcon from '@material-ui/icons/Settings';
+import userAdministration from '../userAdministration';
 // import DashboardPage from 'views/Dashboard/Dashboard.js';
-import UserProfile from '../userAdministration';
+// core components/views for Admin layout
 // import TableList from 'views/TableList/TableList.js';
-// import Typography from 'views/Typography/Typography.js';
 // import Icons from 'views/Icons/Icons.js';
 // import Maps from 'views/Maps/Maps.js';
 // import NotificationsPage from 'views/Notifications/Notifications.js';
@@ -27,20 +27,27 @@ const dashboardRoutes = [
     path: '/user',
     name: 'Thông tin người dùng',
     icon: Person,
-    component: UserProfile,
+    component: userAdministration,
     layout: '/admin',
   },
   {
-    path: '/department ',
-    name: 'Phòng ban',
-    icon: 'content_paste',
-    // component: TableList,
+    path: '/categories',
+    name: 'Danh mục',
+    icon: CategoryIcon,
+    // component: Typography,
     layout: '/admin',
   },
+  // {
+  //   path: '/category ',
+  //   name: 'Danh mục',
+  //   icon: CategoryIcon,
+  //   // component: TableList,
+  //   layout: '/admin',
+  // },
   {
     path: '/app',
     name: 'Ứng dụng',
-    icon: LibraryBooks,
+    icon: AppsIcon,
     // component: Typography,
     layout: '/admin',
   },
@@ -54,7 +61,7 @@ const dashboardRoutes = [
   {
     path: '/Setting',
     name: 'Cài đặt',
-    icon: LocationOn,
+    icon: SettingsIcon,
     // component: Maps,
     layout: '/admin',
   },
