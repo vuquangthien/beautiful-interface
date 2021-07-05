@@ -70,6 +70,8 @@ export default function CustomTable({
   handleUpdate,
 }) {
   const [open, setOpen] = React.useState(false);
+  // const apiRef = useGridApiRef();
+  const [message, setMessage] = React.useState('');
 
   const classes = useStyles();
 
@@ -81,10 +83,13 @@ export default function CustomTable({
     setOpen(false);
   };
 
-  const handleRowSelected = GridRowSelectedParams => {
-    let newRecord;
-    handleUpdate(newRecord);
-  };
+  // React.useEffect(() => {
+  //   return apiRef.current.subscribeEvent('columnResize', params => {
+  //     setMessage(
+  //       `Column ${params.colDef.headerName} resized to ${params.width}px.`,
+  //     );
+  //   });
+  // }, [apiRef]);
 
   return (
     <div className={classes.root}>
@@ -105,12 +110,52 @@ export default function CustomTable({
             toolbarColumns: '',
             toolbarExport: '',
             toolbarExportCSV: 'Xuất',
+            // Columns panel text
+            columnsPanelTextFieldLabel: 'Tìm cột',
+            columnsPanelTextFieldPlaceholder: 'Tiêu đề cột',
+            columnsPanelDragIconLabel: 'Sắp xếp lại cột',
+            columnsPanelShowAllButton: 'Hiện tất cả',
+            columnsPanelHideAllButton: 'Ẩn tất cả',
+            // Filter panel text
+            filterPanelAddFilter: 'Thêm bộ lọc',
+            filterPanelDeleteIconLabel: 'Xóa',
+            filterPanelOperators: 'Cách khai thác',
+            filterPanelOperatorAnd: 'Và',
+            filterPanelOperatorOr: 'Hoặc',
+            filterPanelColumns: 'Cột',
+            filterPanelInputLabel: 'Giá trị',
+            filterPanelInputPlaceholder: 'Lọc giá trị',
+            // Filter operators text
+            filterOperatorContains: 'Chứa đựng',
+            filterOperatorEquals: 'Bằng',
+            filterOperatorStartsWith: 'Bắt đầu với',
+            filterOperatorEndsWith: 'Kết thúc với',
+            filterOperatorIs: 'Là',
+            filterOperatorNot: 'Không là',
+            filterOperatorAfter: 'là sau',
+            filterOperatorOnOrAfter: 'là trên hoặc sau',
+            filterOperatorBefore: 'là trước đây',
+            filterOperatorOnOrBefore: 'là trên hoặc trước đó',
+            // Column menu text
+            columnMenuLabel: 'Menu',
+            columnMenuShowColumns: 'Hiện các cột',
+            columnMenuFilter: 'Bộ lọc',
+            columnMenuHideColumn: 'Ẩn',
+            columnMenuUnsort: 'Bỏ sắp xếp',
+            columnMenuSortAsc: 'Sắp xếp bởi ASC',
+            columnMenuSortDesc: 'Sắp xếp bởi DESC',
+            // Rows selected footer text
+            footerRowSelected: count =>
+              count !== 1
+                ? `${count.toLocaleString()} dòng đã chọn`
+                : `${count.toLocaleString()} dòng đã chọn`,
+            // Total rows footer text
+            footerTotalRows: 'Tổng số hàng:',
           }}
           components={{
             Toolbar: GridToolbar,
           }}
           onEditCellChangeCommitted={handleEditCellChangeCommitted}
-          rowSelected={handleRowSelected}
         />
       </div>
       <Tooltip title="Xóa">

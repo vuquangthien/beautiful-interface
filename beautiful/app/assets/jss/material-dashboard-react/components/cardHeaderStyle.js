@@ -119,6 +119,10 @@ const cardHeaderStyle = {
       ...roseCardHeader,
     },
   },
+  brownCardHeader: {
+    color: whiteColor,
+    background: '#333333',
+  },
 };
 
 export default cardHeaderStyle;
