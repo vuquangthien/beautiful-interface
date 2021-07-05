@@ -18,7 +18,7 @@ import userAdministration from '../userAdministration';
 const dashboardRoutes = [
   {
     path: '/dashboard',
-    name: 'Dashboard',
+    name: 'Loại danh mục',
     icon: Dashboard,
     // component: DashboardPage,
     layout: '/admin',

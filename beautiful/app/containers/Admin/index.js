@@ -8,12 +8,15 @@ import 'assets/css/material-dashboard-react.css?v=1.10.0';
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 // @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  makeStyles,
+  ThemeProvider,
+} from '@material-ui/core/styles';
 // core components
 import Navbar from 'components/Navbars';
 import Footer from 'components/Footer';
 import Sidebar from 'components/Sidebar';
-// import FixedPlugin from 'components/FixedPlugin/FixedPlugin.js';
 
 import routes from 'containers/Admin/routes';
 
@@ -44,29 +47,24 @@ const switchRoutes = (
 
 const useStyles = makeStyles(styles);
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#00acc1',
+    },
+  },
+});
+
 export default function Admin({ ...rest }) {
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
   // states and functions
-  const [image, setImage] = React.useState(bgImage);
-  const [color, setColor] = React.useState('blue');
-  const [fixedClasses, setFixedClasses] = React.useState('dropdown show');
+  const [image] = React.useState(bgImage);
+  const [color] = React.useState('blue');
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const handleImageClick = image => {
-    setImage(image);
-  };
-  const handleColorClick = color => {
-    setColor(color);
-  };
-  const handleFixedClick = () => {
-    if (fixedClasses === 'dropdown') {
-      setFixedClasses('dropdown show');
-    } else {
-      setFixedClasses('dropdown');
-    }
-  };
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -95,41 +93,35 @@ export default function Admin({ ...rest }) {
     };
   }, [mainPanel]);
   return (
-    <div className={classes.wrapper}>
-      <Sidebar
-        routes={routes}
-        logoText="Lifetek"
-        logo={logo}
-        image={image}
-        handleDrawerToggle={handleDrawerToggle}
-        open={mobileOpen}
-        color={color}
-        {...rest}
-      />
-      <div className={classes.mainPanel} ref={mainPanel}>
-        <Navbar
+    <ThemeProvider theme={theme}>
+      <div className={classes.wrapper}>
+        <Sidebar
           routes={routes}
+          logoText="Lifetek"
+          logo={logo}
+          image={image}
           handleDrawerToggle={handleDrawerToggle}
+          open={mobileOpen}
+          color={color}
           {...rest}
         />
-        {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        {getRoute() ? (
-          <div className={classes.content}>
-            <div className={classes.container}>{switchRoutes}</div>
-          </div>
-        ) : (
-          <div className={classes.map}>{switchRoutes}</div>
-        )}
-        {getRoute() ? <Footer /> : null}
-        {/* <FixedPlugin
-          handleImageClick={handleImageClick}
-          handleColorClick={handleColorClick}
-          bgColor={color}
-          bgImage={image}
-          handleFixedClick={handleFixedClick}
-          fixedClasses={fixedClasses}
-        /> */}
+        <div className={classes.mainPanel} ref={mainPanel}>
+          <Navbar
+            routes={routes}
+            handleDrawerToggle={handleDrawerToggle}
+            {...rest}
+          />
+          {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
+          {getRoute() ? (
+            <div className={classes.content}>
+              <div className={classes.container}>{switchRoutes}</div>
+            </div>
+          ) : (
+            <div className={classes.map}>{switchRoutes}</div>
+          )}
+          {getRoute() ? <Footer /> : null}
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }

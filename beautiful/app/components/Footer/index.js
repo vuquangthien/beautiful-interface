@@ -27,11 +27,6 @@ export default function Footer() {
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a href="#portfolio" className={classes.block}>
-                Danh mục đầu tư
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
               <a href="#blog" className={classes.block}>
                 Blog
               </a>
@@ -44,7 +39,6 @@ export default function Footer() {
             <a href="/" className={classes.a}>
               Lifetek
             </a>
-            , made with love for a better web
           </span>
         </p>
       </div>
