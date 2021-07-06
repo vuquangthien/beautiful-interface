@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100%;
     min-width: 100%;
   }
+  
 `;
 
 export default GlobalStyle;

@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 // @material-ui/icons
 import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
@@ -6,10 +7,10 @@ import Notifications from '@material-ui/icons/Notifications';
 import AppsIcon from '@material-ui/icons/Apps';
 import CategoryIcon from '@material-ui/icons/Category';
 import SettingsIcon from '@material-ui/icons/Settings';
+import Application from 'containers/Application';
 import userAdministration from '../userAdministration';
 // import DashboardPage from 'views/Dashboard/Dashboard.js';
 // core components/views for Admin layout
-// import TableList from 'views/TableList/TableList.js';
 // import Icons from 'views/Icons/Icons.js';
 // import Maps from 'views/Maps/Maps.js';
 // import NotificationsPage from 'views/Notifications/Notifications.js';
@@ -48,7 +49,7 @@ const dashboardRoutes = [
     path: '/app',
     name: 'Ứng dụng',
     icon: AppsIcon,
-    // component: Typography,
+    component: Application,
     layout: '/admin',
   },
   {

@@ -10,7 +10,21 @@ const useStyles = makeStyles(() => ({
 }));
 
 function CustomTextField(props) {
-  const { endIcon, startIcon, required, value, onChange, readOnly, helperText, defaultValue, maxLength, type, multiline,error, ...rest } = props;
+  const {
+    endIcon,
+    startIcon,
+    required,
+    value,
+    onChange,
+    readOnly,
+    helperText,
+    defaultValue,
+    maxLength,
+    type,
+    multiline,
+    error,
+    ...rest
+  } = props;
   const classes = useStyles();
   const trimStartValue = e => {
     if (onChange) {
@@ -23,7 +37,7 @@ function CustomTextField(props) {
         if (type === 'phoneNumber') {
           if (e.target.value[0] !== '0') {
             e.target.value = '';
-          };
+          }
           e.target.value = e.target.value.replace(/\D/g, '');
           if (maxLength && e && e.target && e.target.value) {
             const len = parseInt(maxLength, 10);
@@ -32,59 +46,66 @@ function CustomTextField(props) {
         } else if (type === 'number') {
           e.target.value = e.target.value.replace(/\D/g, '');
         } else if (type === 'name') {
-          e.target.value = e.target.value.replace(/[^'A-Za-zsÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềếểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]|\s(?=\s)/g, '');
+          e.target.value = e.target.value.replace(
+            /[^'A-Za-zsÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềếểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]|\s(?=\s)/g,
+            '',
+          );
         } else if (type === 'snake_Case') {
           e.target.value = e.target.value.replace(/[^a-zA-Z0-9_]/g, '');
         } else if (type === 'TextCapital') {
           e.target.value = e.target.value.toLowerCase();
-          e.target.value = e.target.value.replace(/(?:^|\s)\S/g, letter => letter.toUpperCase());
+          e.target.value = e.target.value.replace(/(?:^|\s)\S/g, letter =>
+            letter.toUpperCase(),
+          );
         }
         if (e.target.value) {
           const len = parseInt(maxLength, 10);
           if (len && e.target.value.length > len) return;
         }
-
       }
       onChange(e);
     }
-  }
+  };
   const inputClasses = readOnly ? classes.input : null;
   useEffect(() => {
-    const formArrRemoveHoverText = document.getElementsByClassName('formBrowserNoValidateToRemoveTextHover');
+    const formArrRemoveHoverText = document.getElementsByClassName(
+      'formBrowserNoValidateToRemoveTextHover',
+    );
+    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < formArrRemoveHoverText.length; i++) {
-      formArrRemoveHoverText[i].addEventListener('submit', function () {
+      // eslint-disable-next-line func-names
+      formArrRemoveHoverText[i].addEventListener('submit', function() {
+        // eslint-disable-next-line no-restricted-globals
         event.preventDefault();
       });
-    };
+    }
   }, []);
   // TT : remove validate message - of browser
-  return <form className='formBrowserNoValidateToRemoveTextHover' noValidate>
-    <TextField
-      helperText={helperText}
-      required={required}
-      multiline={multiline}
-      InputProps={{
-        className: inputClasses,
-        endAdornment: endIcon && (
-          <InputAdornment position="end">
-            {endIcon}
-          </InputAdornment>
-        ),
-        startAdornment: startIcon && (
-          <InputAdornment position="start">
-            {startIcon}
-          </InputAdornment>
-        ),
-      }}
-      error={error}
-      disabled={readOnly}
-      value={value}
-      onChange={trimStartValue}
-      defaultValue={defaultValue}
-      // type={type}
-      {...rest}
-    />
-  </form>;
+  return (
+    <form className="formBrowserNoValidateToRemoveTextHover" noValidate>
+      <TextField
+        helperText={helperText}
+        required={required}
+        multiline={multiline}
+        InputProps={{
+          className: inputClasses,
+          endAdornment: endIcon && (
+            <InputAdornment position="end">{endIcon}</InputAdornment>
+          ),
+          startAdornment: startIcon && (
+            <InputAdornment position="start">{startIcon}</InputAdornment>
+          ),
+        }}
+        error={error}
+        disabled={readOnly}
+        value={value}
+        onChange={trimStartValue}
+        defaultValue={defaultValue}
+        // type={type}
+        {...rest}
+      />
+    </form>
+  );
 }
 export default memo(CustomTextField);
 
@@ -119,4 +140,4 @@ CustomTextField.propTypes = {
   required: PropTypes.bool,
   multiline: PropTypes.bool,
   error: PropTypes.bool,
-}
+};

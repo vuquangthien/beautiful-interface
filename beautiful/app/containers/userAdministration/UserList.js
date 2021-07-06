@@ -27,8 +27,8 @@ import saga from './saga';
 const key = 'userAdministration';
 
 const columns = [
-  { id: 1, name: 'col1', title: 'Column 1', checked: true },
-  { id: 2, name: 'col2', title: 'Column 2', checked: true },
+  { id: 1, name: 'col1', title: 'Column 1', width: 140, checked: true },
+  { id: 2, name: 'col2', title: 'Column 2', width: 140, checked: true },
 ];
 
 export function UserList(props) {
@@ -62,7 +62,6 @@ export function UserList(props) {
       col1,
       col2,
     };
-    setNewRows([...rows, newRow]);
   };
 
   const handleAddItem = () => {

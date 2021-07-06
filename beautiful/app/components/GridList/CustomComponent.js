@@ -108,7 +108,7 @@ export const TextSearchField = memo(props => {
   };
   return (
     <CustomTextField
-      error={textSearch && !Validator.validateTextField(textSearch)}
+      // error={textSearch && !Validator.validateTextField(textSearch)}
       InputProps={{
         endAdornment: (
           <>

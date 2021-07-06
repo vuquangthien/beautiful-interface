@@ -65,7 +65,7 @@ const container = {
 const defaultFont = {
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   fontWeight: '300',
-  lineHeight: '1.5em',
+  lineHeight: '1em',
 };
 
 const primaryColor = ['#00acc1', '#00acc1', '#00acc1', '#00acc1'];
@@ -173,7 +173,7 @@ const card = {
   display: 'inline-block',
   position: 'relative',
   width: '100%',
-  margin: '25px 0',
+  margin: '20px 0',
   boxShadow: `0 1px 4px 0 rgba(${hexToRgb(blackColor)}, 0.14)`,
   borderRadius: '3px',
   color: `rgba(${hexToRgb(blackColor)}, 0.87)`,
@@ -214,8 +214,8 @@ const cardTitle = {
   minHeight: 'auto',
   '& a': {
     ...title,
-    marginTop: '.625rem',
-    marginBottom: '0.75rem',
+    marginTop: '.325rem',
+    marginBottom: '0.25rem',
     minHeight: 'auto',
   },
 };

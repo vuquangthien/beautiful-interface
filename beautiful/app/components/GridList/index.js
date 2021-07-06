@@ -1,4 +1,5 @@
-/* eslint-disable no-constant-condition */
+/* eslint-disable indent */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-expressions */
 /**
@@ -52,7 +53,7 @@ import {
   convertToDateString,
   convertFileSize,
   convertMsToTime,
-  // checkHasPermission,
+  checkHasPermission,
 } from '../../utils/common';
 import { FORMAT_TYPE, DATE_FORMAT } from '../../utils/constants';
 import {
@@ -112,8 +113,12 @@ function GridList(props) {
     tableHeight,
     isFileDetailTable,
     disableAddItem,
-    // currentUser,
-    // openLinkPermission,
+    currentUser,
+    viewConfigPermission,
+    openLinkPermission,
+    // textSearchPermission,
+    addItemPermission,
+    deleteItemPermission,
     // editItemPermission,
     client,
   } = props;
@@ -284,7 +289,7 @@ function GridList(props) {
       onCreateViewConfig(data);
     }
   };
-  // console.log('displayRows', displayRows);
+
   const handleSelectionChange = selection => {
     const selected = [];
     selection.forEach(index => {
@@ -377,8 +382,7 @@ function GridList(props) {
           // currentUser &&
           // currentUser.actions &&
           // currentUser.actions.find(e => `${e}` === `${openLinkPermission}`)
-          // checkHasPermission(currentUser, openLinkPermission)
-          true
+          checkHasPermission(currentUser, openLinkPermission)
         ) {
           return (
             <Button
@@ -405,8 +409,7 @@ function GridList(props) {
           // currentUser &&
           // currentUser.actions &&
           // currentUser.actions.find(e => `${e}` === `${openLinkPermission}`)
-          // checkHasPermission(currentUser, openLinkPermission)
-          true
+          checkHasPermission(currentUser, openLinkPermission)
         ) {
           return (
             <Box textAlign="center">
@@ -437,8 +440,7 @@ function GridList(props) {
             // currentUser &&
             // currentUser.actions &&
             // currentUser.actions.find(e => `${e}` === `${openLinkPermission}`)
-            // checkHasPermission(currentUser, openLinkPermission)
-            true
+            checkHasPermission(currentUser, openLinkPermission)
           ) {
             return (
               <Button
@@ -451,7 +453,11 @@ function GridList(props) {
             );
           }
           return (
-            <Button style={{ paddingLeft: 0 }}>
+            <Button
+              style={{ paddingLeft: 0 }}
+              // color="primary"
+              // onClick={() => onOpenLink(item.row)}
+            >
               {value && convertToDateString(value, DATE_FORMAT.DATE_TIME)}
             </Button>
           );
@@ -511,7 +517,7 @@ function GridList(props) {
       )}
     </Grid>
   );
-  // console.log('props', props);
+
   return (
     <div style={props.style}>
       <Grid container spacing={2} alignItems="center">
@@ -519,6 +525,10 @@ function GridList(props) {
           <Grid container spacing={2}>
             <Grid item xs>
               {onTextSearch && (
+                // currentUser &&
+                // currentUser.actions &&
+                // currentUser.actions.find(
+                //   e => `${e}` === `${textSearchPermission}`,)
                 <TextSearchField
                   onTextSearch={onTextSearch}
                   textFilter={props.textFilter}
@@ -532,46 +542,64 @@ function GridList(props) {
         </Grid>
         <Grid item lg={6} xs={6}>
           <Grid container justify="flex-end" spacing={2}>
-            {onAddItem && (
-              <Grid item>
-                <CustomFab
-                  color="primary"
-                  size="small"
-                  tooltip="Thêm mới"
-                  onClick={onAddItem}
-                  disabled={disableAddItem}
-                  className={classes.fabControl}
-                >
-                  <Add fontSize="small" />
-                </CustomFab>
-              </Grid>
-            )}
-            {onDeleteItem && selectedItem.length > 1 && (
-              <Grid item>
-                <CustomFab
-                  color="secondary"
-                  tooltip="Xóa chọn"
-                  size="small"
-                  onClick={handleDeleteAllItem}
-                  className={classes.fabControl}
-                >
-                  <Delete fontSize="small" />
-                </CustomFab>
-              </Grid>
-            )}
-            {showViewConfig && (
-              <Grid item>
-                <CustomFab
-                  color="primary"
-                  size="small"
-                  tooltip="Cấu hình"
-                  onClick={handleOpenViewConfigDialog}
-                  className={classes.fabControl}
-                >
-                  <Settings fontSize="small" />
-                </CustomFab>
-              </Grid>
-            )}
+            {onAddItem &&
+              // currentUser &&
+              // currentUser.actions &&
+              // currentUser.actions.find(
+              //   e => `${e}` === `${addItemPermission}`,
+              // )
+              checkHasPermission(currentUser, addItemPermission) && (
+                <Grid item>
+                  <CustomFab
+                    color="primary"
+                    size="small"
+                    tooltip="Thêm mới"
+                    onClick={onAddItem}
+                    disabled={disableAddItem}
+                    className={classes.fabControl}
+                  >
+                    <Add fontSize="small" />
+                  </CustomFab>
+                </Grid>
+              )}
+            {onDeleteItem &&
+              selectedItem.length > 1 &&
+              // currentUser.actions &&
+              // currentUser.actions.find(
+              //   e => `${e}` === `${deleteItemPermission}`,
+              // )
+              checkHasPermission(currentUser, deleteItemPermission) && (
+                <Grid item>
+                  <CustomFab
+                    color="secondary"
+                    tooltip="Xóa chọn"
+                    size="small"
+                    onClick={handleDeleteAllItem}
+                    className={classes.fabControl}
+                  >
+                    <Delete fontSize="small" />
+                  </CustomFab>
+                </Grid>
+              )}
+            {showViewConfig &&
+              // currentUser &&
+              // currentUser.actions &&
+              // currentUser.actions.find(
+              //   e => `${e}` === `${viewConfigPermission}`,
+              // )
+              checkHasPermission(currentUser, viewConfigPermission) && (
+                <Grid item>
+                  <CustomFab
+                    color="primary"
+                    size="small"
+                    tooltip="Cấu hình"
+                    onClick={handleOpenViewConfigDialog}
+                    className={classes.fabControl}
+                  >
+                    <Settings fontSize="small" />
+                  </CustomFab>
+                </Grid>
+              )}
             <Grid item>{extendActions}</Grid>
           </Grid>
         </Grid>
@@ -584,7 +612,8 @@ function GridList(props) {
           marginTop: 10,
         }}
       >
-        {viewableColumns && (
+        {viewableColumns.length && (
+          // {!isLoading && viewableColumns.length && (
           <GridTable
             rows={displayRows}
             columns={viewableColumns}
@@ -629,7 +658,7 @@ function GridList(props) {
               columnExtensions={columnWidths}
             />
             {showCheckBox && (
-              <TableSelection showSelectAll={false} showSelectionColumn />
+              <TableSelection showSelectAll showSelectionColumn />
             )}
             {showPagination && (
               <PagingPanel
@@ -663,6 +692,20 @@ function GridList(props) {
             )}
           </GridTable>
         )}
+        {/* TT : RENDER DIV VITUAL TABLE - WHEN LOADING + ERROR COLUMN CONFIG */}
+        {/* {
+          <div
+            style={{
+              position: 'relative',
+              width: '100%',
+            }}
+          >
+            {isLoading && <TableVirtualLoading zIndexNumber={800} />}
+            {viewableColumns.length === 0 && (
+              <TableVirtualLoading zIndexNumber={600} />
+            )}
+          </div>
+        } */}
       </div>
       {isLoading && <Loading />}
       <ViewConfigDialog
@@ -719,7 +762,8 @@ GridList.propTypes = {
   extendActions: PropTypes.object,
   extendFilter: PropTypes.node || PropTypes.object,
   disableAddItem: PropTypes.bool,
-  // openLinkPermission: PropTypes.string,
+  viewConfigPermission: PropTypes.string,
+  openLinkPermission: PropTypes.string,
   client: PropTypes.bool,
   tableHeight: PropTypes.number,
 };
